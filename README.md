@@ -1,4 +1,4 @@
-# docker-base-setup
+## docker-base-setup
 php7-nginx-mysql
 
 # up the container
@@ -18,6 +18,8 @@ sudo docker exec -it testing_app bash
 composer create-project --prefer-dist laravel/laravel
 
 # to run migration 
+# don't forget to setup .env first
+# fill it like docker-compose
 # go inside container first
 
 
