@@ -16,7 +16,7 @@ class CompanieFactory extends Factory
         return [
             'name'=>$this->faker->company(),
             'email'=>$this->faker->email(),
-            'website'=>'www.'.$this->faker->company().'xyz',
+            'website'=>'www.'.$this->faker->company().'.xyz',
         ];
     }
 }

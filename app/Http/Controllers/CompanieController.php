@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CompanieRequest;
 use App\Models\Companie;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,12 @@ class CompanieController extends Controller
      */
     public function index()
     {
-        //
+        // $data=Companie::all();
+        $data=Companie::paginate(5);
+        $no=0;
+        // return view('companie.index',compact('data'));
+        return view('companie.index',compact('data'))
+            ->with('i', (request()->input('page',1) - 1) * 5);
     }
 
     /**
@@ -24,7 +30,7 @@ class CompanieController extends Controller
      */
     public function create()
     {
-        //
+        return view('companie.create');
     }
 
     /**
@@ -33,9 +39,16 @@ class CompanieController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CompanieRequest $request)
     {
-        //
+        $data=$request->validated();
+        $savePath='images/';
+        $logoName=$data['logo']->getClientOriginalName();
+        $data['logo']->move($savePath,$logoName);
+        $data['logo']=$logoName;
+        Companie::create($data);
+
+        return redirect()->route('companie.index');
     }
 
     /**
@@ -57,7 +70,7 @@ class CompanieController extends Controller
      */
     public function edit(Companie $companie)
     {
-        //
+        return view('companie.edit',compact('companie'));
     }
 
     /**
@@ -67,9 +80,18 @@ class CompanieController extends Controller
      * @param  \App\Models\Companie  $companie
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Companie $companie)
+    public function update(CompanieRequest $request, Companie $companie)
     {
-        //
+        $updateData=$request->validated();
+        $savePath='images';
+        // check validation if no new image input use old image
+        $logoName=$updateData['logo']->getClientOriginalName(); 
+        $updateData['logo']->move($savePath,$logoName);
+        $updateData['logo']=$logoName;
+
+        $companie->update($updateData);
+        return redirect()->route('companie.index');
+        
     }
 
     /**
@@ -80,6 +102,7 @@ class CompanieController extends Controller
      */
     public function destroy(Companie $companie)
     {
-        //
+        $companie->delete();
+        return redirect()->route('companie.index');
     }
 }
