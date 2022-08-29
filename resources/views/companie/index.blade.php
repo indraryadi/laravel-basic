@@ -14,6 +14,7 @@
         <tr>
             <td>No</td>
             <td>Name</td>
+            <td>Email</td>
             <td>Logo</td>
             <td>website</td>
             <td>Action</td>
@@ -24,6 +25,7 @@
         <tr>
             <td>{{++$i}}</td>
             <td>{{$companie->name}}</td>
+            <td>{{$companie->email}}</td>
             <td><img src="/images/{{$companie->logo}}" alt="" class="companie-logo"></td>
             <td>{{$companie->website}}</td>
             <td>

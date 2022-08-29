@@ -84,11 +84,12 @@ class CompanieController extends Controller
     {
         $updateData=$request->validated();
         $savePath='images';
-        // check validation if no new image input use old image
-        $logoName=$updateData['logo']->getClientOriginalName(); 
-        $updateData['logo']->move($savePath,$logoName);
-        $updateData['logo']=$logoName;
-
+        // dd($updateData['logo']); 
+        if (array_key_exists('logo',$updateData)) {
+            $logoName=$updateData['logo']->getClientOriginalName(); 
+            $updateData['logo']->move($savePath,$logoName);
+            $updateData['logo']=$logoName;
+        }
         $companie->update($updateData);
         return redirect()->route('companie.index');
         

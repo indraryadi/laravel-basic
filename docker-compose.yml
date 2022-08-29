@@ -8,7 +8,7 @@ services:
       context: ./
       dockerfile: Dockerfile
     image: testing
-    container_name: testing-app
+    container_name: laravel-app
     restart: unless-stopped
     working_dir: /var/www/
     volumes:
@@ -18,7 +18,7 @@ services:
 
   db:
     image: mysql:5.7
-    container_name: testing-db
+    container_name: laravel-db
     restart: unless-stopped
     ports:
       - 3306:3306
@@ -36,7 +36,7 @@ services:
 
   nginx:
     image: nginx:alpine
-    container_name: testing-nginx
+    container_name: laravel-nginx
     restart: unless-stopped
     ports:
       - 8000:80
