@@ -33,9 +33,9 @@ class CompanieRequest extends FormRequest
 
         return [
             'name' => 'required',
-            // 'email'=>'required|email|unique:companies,email',
+            'email'=>'required|email|unique:companies,email',
             // 'email'=>'required|email|unique:companies,email'.$this->companie->id,
-            'email' => ['required', Rule::unique('companies')->ignore($this->companie->id)],
+            // 'email' => ['required', Rule::unique('companies')->ignore($this->companie->id)],
             'logo' => 'nullable|mimes:jpg,jpeg,png|image|max:2048',
             'website' => 'required',
         ];
