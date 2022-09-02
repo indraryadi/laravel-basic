@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Companie;
 use App\Models\Employee;
 use Illuminate\Http\Request;
+use App\Http\Requests\EmployeeRequest;
 
 class EmployeeController extends Controller
 {
@@ -14,7 +16,8 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        //
+        $data=Employee::paginate(10);
+        return view('employee.index',compact('data'));
     }
 
     /**
@@ -24,7 +27,8 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-        //
+        $data=Companie::all();
+        return view('employee.create',compact('data'));
     }
 
     /**
@@ -33,9 +37,10 @@ class EmployeeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(EmployeeRequest $request)
     {
-        //
+        $data=$request->validated();
+        dd($data);
     }
 
     /**

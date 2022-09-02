@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CompanieController;
+use App\Http\Controllers\EmployeeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,3 +19,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::resource('companie',CompanieController::class);
+Route::resource('employee',EmployeeController::class);
