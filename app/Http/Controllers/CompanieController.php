@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CompanieRequest;
 use App\Models\Companie;
 use Illuminate\Http\Request;
+use App\Http\Requests\CompanieRequest;
+use App\Http\Requests\StoreCompanieRequest;
+use App\Http\Requests\UpdateCompanieRequest;
 
 class CompanieController extends Controller
 {
@@ -39,7 +41,7 @@ class CompanieController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CompanieRequest $request)
+    public function store(StoreCompanieRequest $request)
     {
         $data=$request->validated();
         $savePath='images/';
@@ -80,8 +82,10 @@ class CompanieController extends Controller
      * @param  \App\Models\Companie  $companie
      * @return \Illuminate\Http\Response
      */
-    public function update(CompanieRequest $request, Companie $companie)
+    // public function update(UpdateCompanieRequest $request, Companie $companie)
+    public function update(UpdateCompanieRequest $request, Companie $companie)
     {
+        // dd($request->all());
         $updateData=$request->validated();
         $savePath='images';
         // dd($updateData['logo']); 
@@ -89,6 +93,8 @@ class CompanieController extends Controller
             $logoName=$updateData['logo']->getClientOriginalName(); 
             $updateData['logo']->move($savePath,$logoName);
             $updateData['logo']=$logoName;
+        }else{
+            unset($updateData['logo']);
         }
         $companie->update($updateData);
         return redirect()->route('companie.index');
