@@ -47,6 +47,14 @@ services:
     networks:
       - laravel8
 
+  node:
+    image: node:alpine
+    container_name: laravel-node
+    restart: unless-stopped
+    volumes:
+      - ./:/var/www
+    networks:
+      - laravel8
 networks:
   laravel8:
     driver: bridge
