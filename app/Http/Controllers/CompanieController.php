@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\CompanieDataTable;
 use App\Models\Companie;
 use Illuminate\Http\Request;
 use App\Http\Requests\CompanieRequest;
@@ -15,14 +16,16 @@ class CompanieController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(CompanieDataTable $dataTable)
     {
-        // $data=Companie::all();
-        $data=Companie::paginate(5);
-        $no=0;
-        // return view('companie.index',compact('data'));
-        return view('companie.index',compact('data'))
-            ->with('i', (request()->input('page',1) - 1) * 5);
+        // // $data=Companie::all();
+        // $data=Companie::paginate(5);
+        // $no=0;
+        // // return view('companie.index',compact('data'));
+        // return view('companie.index',compact('data'))
+        //     ->with('i', (request()->input('page',1) - 1) * 5);
+        return $dataTable->render('companie.index');
+
     }
 
     /**

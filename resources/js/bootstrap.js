@@ -1,5 +1,13 @@
 window._ = require('lodash');
 
+try {
+    require('bootstrap');
+    require('datatables.net-bs5');
+    require('datatables.net-buttons-bs5');
+    require('datatables.net-select-bs5');
+    require('datatables.net-searchpanes-bs5');
+} catch (e) {}
+
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
  * to our Laravel back-end. This library automatically handles sending the
