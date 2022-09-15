@@ -2,14 +2,14 @@
 
 namespace App\DataTables;
 
-use App\Models\Companie;
+use App\Models\Employee;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class CompanieDataTable extends DataTable
+class EmployeeDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -21,16 +21,16 @@ class CompanieDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->addColumn('action', 'companie.action');
+            ->addColumn('action', 'employee.action');
     }
 
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\Companie $model
+     * @param \App\Models\Employee $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(Companie $model)
+    public function query(Employee $model)
     {
         return $model->newQuery();
     }
@@ -43,10 +43,10 @@ class CompanieDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-                    ->setTableId('companie-table')
+                    ->setTableId('employee-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
-                    ->dom('lBfrtip')
+                    ->dom('Bfrtip')
                     ->orderBy(1)
                     ->buttons(
                         Button::make('create'),
@@ -65,14 +65,15 @@ class CompanieDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('id'),
-            Column::make('name'),
-            Column::make('email'),
             Column::computed('action')
                   ->exportable(false)
                   ->printable(false)
                   ->width(60)
                   ->addClass('text-center'),
+            Column::make('id'),
+            Column::make('add your columns'),
+            Column::make('created_at'),
+            Column::make('updated_at'),
         ];
     }
 
@@ -83,6 +84,6 @@ class CompanieDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'Companie_' . date('YmdHis');
+        return 'Employee_' . date('YmdHis');
     }
 }
